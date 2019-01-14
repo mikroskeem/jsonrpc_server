@@ -39,8 +39,9 @@ int handle_request_single(jsonrpc_ctx *ctx, json_t *request, json_t **response) 
     // Check if given JSON-RPC method exists
     struct jsonrpc_handler *found_handler = NULL;
     json_t *_method = json_object_get(request, "method");
+    const char *mname;
     if(json_is_string(_method)) {
-        const char *mname = json_string_value(_method);
+        mname = json_string_value(_method);
         size_t len = strlen(mname);
 
         for(struct jsonrpc_handler *h = (struct jsonrpc_handler *) ctx->handlers; h->name != NULL; h++) {
@@ -105,6 +106,11 @@ int handle_request_single(jsonrpc_ctx *ctx, json_t *request, json_t **response) 
     json_object_set_new(*response, "result", _response);
     json_object_set(*response, "jsonrpc", _version);
     json_object_set(*response, "id", _id);
+
+    // Transform response if transformer function is set
+    if(ctx->response_transformer != NULL) {
+        *response = ctx->response_transformer(mname, *response);
+    }
 
     return ERR_NONE;
 }
