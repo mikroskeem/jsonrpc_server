@@ -109,7 +109,7 @@ int handle_request_single(jsonrpc_ctx *ctx, json_t *request, json_t **response) 
 
     // Transform response if transformer function is set
     if(ctx->response_transformer != NULL) {
-        *response = ctx->response_transformer(mname, *response);
+        *response = ctx->response_transformer(ctx, mname, *response);
     }
 
     return ERR_NONE;

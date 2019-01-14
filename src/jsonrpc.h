@@ -44,7 +44,7 @@ typedef struct jsonrpc_ctx_s {
     const struct jsonrpc_handler *handlers;
 
     // Response transformer
-    json_t *(*response_transformer)(const char *method, json_t *original);
+    json_t *(*response_transformer)(jsonrpc_ctx *ctx, const char *method, json_t *original);
 
     // Context data
     void *data;
