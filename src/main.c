@@ -14,7 +14,7 @@ const struct jsonrpc_handler handlers[] = {
 };
 
 int main(void) {
-    jsonrpc_ctx ctx;
+    jsonrpc_ctx ctx = {0};
     ctx.handlers = handlers;
     jsonrpc_ctx_init(&ctx);
 
