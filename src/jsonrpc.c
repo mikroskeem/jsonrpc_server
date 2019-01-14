@@ -55,7 +55,7 @@ int handle_request_single(jsonrpc_ctx *ctx, json_t *request, json_t **response) 
             return ERR_NOMETHOD;
         }
     } else {
-        *response = generate_invalid_request(NULL);
+        *response = generate_invalid_request(_id);
         return ERR_INVALID;
     }
 
@@ -67,7 +67,7 @@ int handle_request_single(jsonrpc_ctx *ctx, json_t *request, json_t **response) 
         } else if(json_is_object(_params)) {
             flags |= FLAG_KV_PARAMS;
         } else {
-            *response = generate_invalid_request(NULL);
+            *response = generate_invalid_request(_id);
             return ERR_INVALID;
         }
     }
