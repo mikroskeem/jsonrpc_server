@@ -80,9 +80,19 @@ int handle_request_single(jsonrpc_ctx *ctx, json_t *request, json_t **response) 
     json_t *_response = NULL;
     int r = found_handler->handler(ctx, flags, _params, &_response);
 
-    // Something went wrong
-    if(r > 0) {
-        return r;
+    switch(r) {
+        case ERR_NONE:
+            break;
+        case ERR_NOMETHOD: {
+            *response = generate_method_not_found(_id);
+            return r;
+        }
+        case ERR_INVALID: {
+            *response = generate_invalid_request(_id);
+            return r;
+        }
+        case ERR_NOTIF:
+            return r;
     }
 
     // Do nothing when it's a notification
