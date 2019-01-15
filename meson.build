@@ -16,4 +16,7 @@ foreach flag : global_cflags
 endforeach
 
 libjsonrpc = subproject('libjsonrpc_server')
-jsonrpc_server_example = subproject('example')
+
+if get_option('build_examples')
+  jsonrpc_server_example = subproject('example')
+endif
