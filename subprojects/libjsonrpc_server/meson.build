@@ -28,7 +28,7 @@ libjsonrpc_server = shared_library('jsonrpc_server',
         sources,
         include_directories: project_inc,
         dependencies: dependencies,
-        soversion : '0'
+        soversion : '0',
         install: true
 )
 
