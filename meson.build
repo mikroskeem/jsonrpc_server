@@ -28,6 +28,7 @@ server_sources = [
 server_dependencies = [
   dependency('jansson', version: '>=2.12'),
   dependency('zlib', version: '>=1.2.3'),
+  dependency('openssl', version: '>=1.1.1a'),
 ]
 
 executable('jsonrpc_server',
