@@ -1,4 +1,4 @@
-project('libjsonrpc_server', 'C',)
+project('libjsonrpc_server', 'C')
 
 project_cflags = [
   '-fvisibility=hidden',
@@ -28,6 +28,7 @@ libjsonrpc_server = shared_library('jsonrpc_server',
         sources,
         include_directories: project_inc,
         dependencies: dependencies,
+        soversion : '0'
         install: true
 )
 
