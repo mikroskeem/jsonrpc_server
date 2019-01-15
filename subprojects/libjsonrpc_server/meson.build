@@ -3,6 +3,7 @@ project('libjsonrpc_server', 'C',
         license: 'MIT'
 )
 
+cc = meson.get_compiler('c')
 pkg = import('pkgconfig')
 
 project_cflags = [
@@ -26,6 +27,7 @@ headers = [
 ]
 
 dependencies = [
+  cc.find_library('c'),
   dependency('jansson', version: '>=2.12'),
 ]
 
