@@ -57,4 +57,4 @@ int jsonrpc_ctx_destroy(jsonrpc_ctx *ctx);
 int jsonrpc_handle_request(jsonrpc_ctx *ctx, json_t *json, json_t **response);
 
 // Simple request handler, reading request from string and writing string
-int jsonrpc_handle_request_simple(jsonrpc_ctx *ctx, const char *json_body, size_t body_len, char **response, size_t response_len);
+int jsonrpc_handle_request_simple(jsonrpc_ctx *ctx, const char *json_body, size_t body_len, char **response, size_t response_len, json_error_t *err);

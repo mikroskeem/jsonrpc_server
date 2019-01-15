@@ -154,11 +154,17 @@ int jsonrpc_handle_request(jsonrpc_ctx *ctx, json_t *request, json_t **response)
 
 int jsonrpc_handle_request_simple(jsonrpc_ctx *ctx,
                                   const char *json_body, size_t body_len,
-                                  char **response, size_t response_len) {
-    json_error_t err;
+                                  char **response, size_t response_len,
+                                  json_error_t *err) {
     int r = -1;
+
+    // Make sure that response buffer pointer is set
+    if(response == NULL) {
+        return r;
+    }
+
     json_t *resp = NULL;
-    json_t *base = json_loads(json_body, 0, &err);
+    json_t *base = json_loads(json_body, 0, err);
 
     if(base != NULL) {
         r = jsonrpc_handle_request(ctx, base, &resp);
@@ -171,6 +177,11 @@ int jsonrpc_handle_request_simple(jsonrpc_ctx *ctx,
     // Serialize
     char *serialized = json_dumps(resp, 0);
     json_decref(resp);
+
+    // If buffer is null, allocate one
+    if(*response == NULL) {
+        *response = malloc(response_len);
+    }
 
     // Copy
     strncpy(*response, serialized, response_len - 1);

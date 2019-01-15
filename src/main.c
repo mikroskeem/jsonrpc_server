@@ -92,15 +92,16 @@ int main(void) {
     const char *req6 = "[]";
     const char *req7 = "{\"jsonrpc\":\"2.0\",\"id\":0.0,\"method\":\"do_crc32\",\"params\":[\"hello world jsonrpc\"]}";
 
+    json_error_t err = {0};
     char *response = malloc(2048);
-    (void) jsonrpc_handle_request_simple(&ctx, req0, strlen(req0), &response, 2048); printf("%s\n", response);
-    (void) jsonrpc_handle_request_simple(&ctx, req1, strlen(req1), &response, 2048); printf("%s\n", response);
-    (void) jsonrpc_handle_request_simple(&ctx, req2, strlen(req2), &response, 2048); printf("%s\n", response);
-    (void) jsonrpc_handle_request_simple(&ctx, req3, strlen(req3), &response, 2048); printf("%s\n", response);
-    (void) jsonrpc_handle_request_simple(&ctx, req4, strlen(req4), &response, 2048); printf("%s\n", response);
-    (void) jsonrpc_handle_request_simple(&ctx, req5, strlen(req5), &response, 2048); printf("%s\n", response);
-    (void) jsonrpc_handle_request_simple(&ctx, req6, strlen(req6), &response, 2048); printf("%s\n", response);
-    (void) jsonrpc_handle_request_simple(&ctx, req7, strlen(req7), &response, 2048); printf("%s\n", response);
+    (void) jsonrpc_handle_request_simple(&ctx, req0, strlen(req0), &response, 2048, &err); printf("%s\n", response);
+    (void) jsonrpc_handle_request_simple(&ctx, req1, strlen(req1), &response, 2048, &err); printf("%s\n", response);
+    (void) jsonrpc_handle_request_simple(&ctx, req2, strlen(req2), &response, 2048, &err); printf("%s\n", response);
+    (void) jsonrpc_handle_request_simple(&ctx, req3, strlen(req3), &response, 2048, &err); printf("%s\n", response);
+    (void) jsonrpc_handle_request_simple(&ctx, req4, strlen(req4), &response, 2048, &err); printf("%s\n", response);
+    (void) jsonrpc_handle_request_simple(&ctx, req5, strlen(req5), &response, 2048, &err); printf("%s\n", response);
+    (void) jsonrpc_handle_request_simple(&ctx, req6, strlen(req6), &response, 2048, &err); printf("%s\n", response);
+    (void) jsonrpc_handle_request_simple(&ctx, req7, strlen(req7), &response, 2048, &err); printf("%s\n", response);
     free(response);
 
     jsonrpc_ctx_destroy(&ctx);
