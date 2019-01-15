@@ -19,21 +19,36 @@ endforeach
 
 cc = meson.get_compiler('c')
 
-server_inc = include_directories('src')
-server_sources = [
+project_inc = include_directories('src')
+
+library_sources = [
   'src/generic_errors.c',
   'src/jsonrpc.c',
+]
+
+server_sources = [
   'src/main.c',
 ]
 
-server_dependencies = [
+library_dependencies = [
   dependency('jansson', version: '>=2.12'),
+]
+
+server_dependencies = [
   dependency('zlib', version: '>=1.2.3'),
   dependency('openssl', version: '>=1.1.1a'),
 ]
+server_dependencies += library_dependencies
+
+lib = shared_library('jsonrpc_server',
+        library_sources,
+        include_directories: project_inc,
+        dependencies: library_dependencies
+)
 
 executable('jsonrpc_server',
            server_sources,
-           include_directories: server_inc,
-           dependencies: server_dependencies
+           include_directories: project_inc,
+           dependencies: server_dependencies,
+           link_with: [ lib ]
 )
