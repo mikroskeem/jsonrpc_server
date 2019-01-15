@@ -1,4 +1,7 @@
-project('libjsonrpc_server', 'C')
+project('libjsonrpc_server', 'C',
+        version: '0.0.1',
+        license: 'MIT'
+)
 
 pkg = import('pkgconfig')
 

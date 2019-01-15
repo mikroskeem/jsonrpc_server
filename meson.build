@@ -1,6 +1,6 @@
 project('jsonrpc_server', 'C',
         version: '0.0.1',
-        license: 'All rights reserved',
+        license: 'MIT',
         default_options: ['c_std=c11'],
 )
 

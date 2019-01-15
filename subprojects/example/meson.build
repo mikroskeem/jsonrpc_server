@@ -1,4 +1,7 @@
-project('jsonrpc_server_example', 'c')
+project('jsonrpc_server_example', 'C',
+        version: '0.0.1',
+        license: 'MIT',
+)
 
 libjsonrpc_server = subproject('libjsonrpc_server')
 libjsonrpc_server_dep = libjsonrpc_server.get_variable('libjsonrpc_server_dep')
