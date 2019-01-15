@@ -1,5 +1,7 @@
 project('libjsonrpc_server', 'C')
 
+pkg = import('pkgconfig')
+
 project_cflags = [
   '-fvisibility=hidden',
 ]
@@ -24,7 +26,7 @@ dependencies = [
   dependency('jansson', version: '>=2.12'),
 ]
 
-libjsonrpc_server = shared_library('jsonrpc_server',
+libjsonrpc_server = library('jsonrpc_server',
         sources,
         include_directories: project_inc,
         dependencies: dependencies,
@@ -37,4 +39,5 @@ libjsonrpc_server_dep = declare_dependency(
   link_with: [ libjsonrpc_server ]
 )
 
+pkg.generate(libjsonrpc_server)
 install_headers(headers, subdir: 'jsonrpc_server')
