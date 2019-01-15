@@ -1,9 +1,11 @@
 #include "jsonrpc_internal.h"
 
+JSONRPC_EXPORT
 int jsonrpc_ctx_init(jsonrpc_ctx *ctx) {
     return 0;
 }
 
+JSONRPC_EXPORT
 int jsonrpc_ctx_destroy(jsonrpc_ctx *ctx) {
     return 0;
 }
@@ -110,6 +112,7 @@ int handle_request_single(jsonrpc_ctx *ctx, json_t *request, json_t **response) 
     return ERR_NONE;
 }
 
+JSONRPC_EXPORT
 int jsonrpc_handle_request(jsonrpc_ctx *ctx, json_t *request, json_t **response) {
     json_incref(request);
 
@@ -152,6 +155,7 @@ int jsonrpc_handle_request(jsonrpc_ctx *ctx, json_t *request, json_t **response)
     }
 }
 
+JSONRPC_EXPORT
 int jsonrpc_handle_request_simple(jsonrpc_ctx *ctx,
                                   const char *json_body, size_t body_len,
                                   char **response, size_t response_len,

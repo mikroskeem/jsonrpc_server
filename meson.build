@@ -10,6 +10,7 @@ project_cflags = [
   '-Werror',
   '-Wno-error=unused-variable',
   '-fstack-protector-strong',
+  '-fvisibility=hidden',
 ]
 
 foreach flag : project_cflags

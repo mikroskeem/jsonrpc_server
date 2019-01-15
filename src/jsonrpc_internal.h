@@ -4,6 +4,8 @@
 #include "generic_errors.h"
 #include <string.h>
 
+#define JSONRPC_EXPORT __attribute__(( visibility("default") ))
+
 typedef struct jsonrpc_req_ctx_s {
     json_t *request;
     json_t *id;
