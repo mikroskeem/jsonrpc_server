@@ -72,11 +72,6 @@ int handle_request_single(jsonrpc_ctx *ctx, json_t *request, json_t **response) 
         }
     }
 
-    // Debug
-    char *c = json_dumps(_params, 0);
-    printf("%s -> %s\n", json_string_value(_method), c);
-    free(c);
-
     // Run handler
     json_t *_response = NULL;
     int r = found_handler->handler(ctx, flags, _params, &_response);
@@ -139,7 +134,7 @@ int jsonrpc_handle_request(jsonrpc_ctx *ctx, json_t *request, json_t **response)
                 if(child_resp != NULL)
                     json_decref(child_resp);
             } else if(r > 0) {
-                printf("array req r=%d\n", r);
+                // TODO: what did I have to do here again?
             } else {
                 json_array_append_new(*response, child_resp);
             }
